@@ -1,0 +1,29 @@
+1. what is the total amount each customer spent on zomato?
+
+select s.userid,sum(p.price) as total_amt_spent from
+product p join sales s
+on p.product_id=s.product_id
+group by s.userid;
+
+userid  total_amt_spent
+1	5230
+3	4570
+2	2510
+
+2. How many days has each customer visited zomato?
+select count(distinct(created_date)) as distinct_days_visited,s.userid from sales s group by s.userid;
+
+	distict_days_visited	userid
+	7	                    1
+	4	                    2
+	5	                    3
+
+Q3.What was the first product purchased by each customer?
+
+select * from
+(select *,rank() over(partition by userid order by created_date) as rnk from sales) a where rnk=1;
+
+userid    created_date  prdid   rnk
+1	    2016-03-11	    1	    1
+2   	2017-09-24	    1	    1
+3	    2016-11-10	    1	    1
