@@ -84,3 +84,4 @@ userid  count(created_date)  sum(price)
 3	            3	            2720
 1	            5	            4030
 
+
